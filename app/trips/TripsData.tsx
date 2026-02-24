@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import Link from "next/link";
 
 export default async function TripsData() {
   const supabase = await createClient();
@@ -22,8 +23,10 @@ export default async function TripsData() {
     <ul>
       {trips.map((trip) => (
         <li key={trip.id}>
-          {trip.name}
-          {trip.start_date ? ` — ${trip.start_date}` : ""}
+          <Link href={`/trips/${trip.id}`}>
+            {trip.name}
+            {trip.start_date ? ` — ${trip.start_date}` : ""}
+          </Link>
         </li>
       ))}
     </ul>
